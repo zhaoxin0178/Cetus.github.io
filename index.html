@@ -349,24 +349,24 @@
 <hr>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装Git-for-Windows"><a href="#安装Git-for-Windows" class="headerlink" title="安装Git for Windows"></a>安装Git for Windows</h3><p>选择适合自己的版本下载 <a href="https://git-scm.com/download" target="_blank" rel="noopener">Git for Windows</a> ，安装时一路点击next。<br>安装好后打开cmd，输入命令</p>
 <blockquote>
-<p>git version</p>
+<p><code>git version</code></p>
 </blockquote>
 <p>看到下图说明安装完成。</p>
 <p><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fze94drfz0j207g01dgld.jpg" alt=""><br>安装完成后会在文件夹中点击鼠标右键时出现<code>Git GUI Here</code>和<code>Git Bash Here</code>的选项。</p>
 <h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p><a href="https://nodejs.org/en/download" target="_blank" rel="noopener">Node.js下载地址</a><br>安装时选择Add to Path，继续点击next，不需要配置环境变量，且安装Node.js时将会自动安装npm。</p>
 <p>安装完成后打开cmd，输入命令</p>
 <blockquote>
-<p>node -v<br>npm -v</p>
+<p><code>node -v</code><br><code>npm -v</code></p>
 </blockquote>
 <p>看到下图说明安装完成。<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgd09s2ouj205002nt8h.jpg" alt=""></p>
 <h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>以管理员身份进入cmd，输入以下命令安装</p>
 <blockquote>
-<p>npm install hexo-cli -g<br>npm install hexo-deployer-git –save</p>
+<p><code>npm install hexo-cli -g</code><br><code>npm install hexo-deployer-git --save</code></p>
 </blockquote>
 <p>（-g的含义为安装到全局目录中）</p>
 <p>安装完成。测试hexo是否完成安装，输入命令</p>
 <blockquote>
-<p>hexo -v</p>
+<p><code>hexo -v</code></p>
 </blockquote>
 <p>出现版本号为正确安装，如下图。</p>
 <p><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgikk4690j208i083wee.jpg" alt=""></p>
@@ -374,24 +374,21 @@
 <h2 id="本地创建放置博客的文件夹"><a href="#本地创建放置博客的文件夹" class="headerlink" title="本地创建放置博客的文件夹"></a>本地创建放置博客的文件夹</h2><p>我创建的位置为<code>“E:\github\blog”</code>。</p>
 <p>进入文件夹，点击鼠标右键，打开<code>Git Bash Here</code>，对文件夹进行初始化，输入命令：</p>
 <blockquote>
-<p>hexo init</p>
+<p><code>hexo init</code></p>
 </blockquote>
 <p>执行命令后，文件夹中出现如下目录：<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgiruejr9j20gv060jrk.jpg" alt=""><br>接下来输入命令</p>
 <blockquote>
-<p>hexo generate //也可写作hexo g，生成静态页面<br>hexo server //也可写作hexo s，打开本地服务器</p>
+<p><code>hexo generate //也可写作hexo g，生成静态页面</code><br><code>hexo server //也可写作hexo s，打开本地服务器</code></p>
 </blockquote>
 <p>成功打开本地服务器后，显示下图<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgivuhg1xj20eh01zmx1.jpg" alt=""><br>此时可登录<code>localhost:4000</code>，查看效果图如下<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgiz9hu6qj20f60ann01.jpg" alt=""><br>这样就说明hexo部分初始化成功啦。</p>
 <h2 id="将博客部署到Github"><a href="#将博客部署到Github" class="headerlink" title="将博客部署到Github"></a>将博客部署到Github</h2><h3 id="创建博客repository"><a href="#创建博客repository" class="headerlink" title="创建博客repository"></a>创建博客repository</h3><p>到 <a href="https://github.com/" target="_blank" rel="noopener">Github官网</a> 注册Github账号。<br>创建new repository。<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgj2ft7mlj2075058746.jpg" alt=""><br><strong>注意：创建repository时，name必须为“你的github用户名.github.io”，否则后面打开页面时为404。</strong><br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgjdrfb02j20ff0cf0ux.jpg" alt=""><br>（这里我一开始是随便起的名字，打开页面一直显示404，后来发现要对已经创建的repository进行rename之后才能打开页面）</p>
 <h3 id="创建ssh密钥"><a href="#创建ssh密钥" class="headerlink" title="创建ssh密钥"></a>创建ssh密钥</h3><p>右键打开<code>Git Bash</code>，输入命令</p>
 <blockquote>
-<p>ssh-keygen -t rsa -C <code>&quot;your_email@example.com&quot;</code></p>
+<p><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code></p>
 </blockquote>
 <p>这里邮箱填写Github登录邮箱，出现以下文字</p>
 <blockquote>
-<p>Generating public/private rsa key pair.</p>
-</blockquote>
-<blockquote>
-<p>Enter file in which to save the key (/c/Users/xin/.ssh/id_rsa): [Press enter]</p>
+<p><code>Generating public/private rsa key pair.</code><br><code>Enter file in which to save the key (/c/Users/xin/.ssh/id_rsa): [Press enter]</code></p>
 </blockquote>
 <p>可以选择直接按enter将文件保存为括号中的默认名字，也可以按照格式修改id_rsa部分。</p>
 <p>接着根据提示需要输入密码并确认密码，这里我选择无密码，直接按两次enter。完成后显示：</p>
@@ -402,14 +399,11 @@
 <p>点击新建一个ssh keys，名字随意，在下面粘贴刚刚复制好的公钥，点击add新建成功。</p>
 <p>回到本地，在<code>Git Bash</code>中输入命令：</p>
 <blockquote>
-<p>git config –global user.name “zhaoxin0178” //这里用户名为github用户名</p>
-</blockquote>
-<blockquote>
-<p>git config –global user.email  <code>&quot;your_email@example.com&quot;</code> //填写github登录邮箱</p>
+<p><code>git config --global user.name &quot;zhaoxin0178&quot; //这里用户名为github用户名</code><br><code>git config --global user.email  &quot;your_email@example.com&quot; //填写github登录邮箱</code></p>
 </blockquote>
 <p>然后输入下面命令，测试ssh是否设置成功</p>
 <blockquote>
-<p>ssh -T <a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>` //本条命令不要修改任何内容</p>
+<p><code>ssh -T git@github.com //本条命令不要修改任何内容</code></p>
 </blockquote>
 <p>出现下图时，输入yes</p>
 <p><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgjwvl2mbj20es01oq2v.jpg" alt=""></p>
@@ -417,69 +411,42 @@
 <p><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgk2nj0f3j20ho023wf7.jpg" alt=""></p>
 <h3 id="将博客部署到Github-1"><a href="#将博客部署到Github-1" class="headerlink" title="将博客部署到Github"></a>将博客部署到Github</h3><p>在创建的博客文件夹中打开hexo配置文件<code>_config.yml</code>，将文件最后修改为（注意<code>_config.yml</code>文件中所有”:”后面都要加一个空格再填具体内容）</p>
 <blockquote>
-<p>deploy:</p>
-</blockquote>
-<blockquote>
-<p>type: git</p>
-</blockquote>
-<blockquote>
-<p>repository: <code>https://github.com/zhaoxin0178/zhaoxin0178.github.io</code></p>
-</blockquote>
-<blockquote>
-<p>branch: master</p>
+<p><code>deploy:</code><br><code>type: git</code><br><code>repository: https://github.com/zhaoxin0178/zhaoxin0178.github.io</code><br><code>branch: master</code></p>
 </blockquote>
 <p>（repository地址为你的github项目地址）</p>
 <h2 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h2><p>在创建的本地博客文件夹中右键打开<code>Git Bash</code>，输入</p>
 <blockquote>
-<p>hexo new post “The first blog”</p>
+<p><code>hexo new post “The first blog”</code></p>
 </blockquote>
 <p>输出下图，说明博客创建成功，<code>The-first-blog.md</code>就是我们要编辑的博客正文。</p>
 <p><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgke6j4thj20ch011a9v.jpg" alt=""><br>Markdown文件在windows上可以用 <a href="http://markdownpad.com/download.html" target="_blank" rel="noopener">MarkdownPad</a> 打开。<br>编写完博客后，在博客文件夹根目录下打开<code>Git Bash</code>，输入以下命令</p>
 <blockquote>
-<p>hexo g //生成静态网页<br>hexo s //本地预览效果<br>hexo d //上传到github</p>
+<p><code>hexo g //生成静态网页</code><br><code>hexo s //本地预览效果</code><br><code>hexo d //上传到github</code></p>
 </blockquote>
 <p>这时打开域名xxx.github.io就可以看到你的博客啦。<br>（这里顺便推荐一下windows图床工具 <a href="https://github.com/Molunerfinn/PicGo/releases" target="_blank" rel="noopener">PicGo</a>，支持拖拽上传图片并且可以直接生成md格式的连接，在博客中插入图片就比较方便了~）</p>
 <h2 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h2><p>我看了一些主题，还是不得不觉得Next最火是有理由的！下面就配置一下Next。<br>在博客文件夹中右键打开<code>Git Bash</code>，输入</p>
 <blockquote>
-<p>git clone <code>https://github.com/iissnan/hexo-theme-next themes/next</code></p>
+<p><code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></p>
 </blockquote>
 <p><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgl831o5nj20e40333yj.jpg" alt=""><br>得到克隆的next主题文件。<br>打开<code>E:\github\blog\_config.yml</code>，修改：</p>
 <blockquote>
-<p>theme: next</p>
+<p><code>theme: next</code></p>
 </blockquote>
 <p>并修改主题语言为中文，修改博客名字等</p>
 <blockquote>
-<p>title: Cetus’ Blog</p>
-</blockquote>
-<blockquote>
-<p>subtitle:</p>
-</blockquote>
-<blockquote>
-<p>description:</p>
-</blockquote>
-<blockquote>
-<p>keywords:</p>
-</blockquote>
-<blockquote>
-<p>author: Cetus</p>
-</blockquote>
-<blockquote>
-<p>language: zh-Hans</p>
-</blockquote>
-<blockquote>
-<p>timezone: Asia/Shanghai</p>
+<p><code>title: Cetus&#39; Blog</code><br><code>subtitle:</code><br><code>description:</code><br><code>keywords:</code><br><code>author: Cetus</code><br><code>language: zh-Hans</code><br><code>timezone: Asia/Shanghai</code></p>
 </blockquote>
 <p>这里timezone必须这样填，不要填其他地址，否则后面会报错 Cannot read property ‘offset’ of null。<br>这样主题就设置好了。<br>Next有几种不同主题，修改方法如下：<br>打开<code>E:\github\blog\themes\next\_config.yml</code>文件，按 ctrl+f 找到 scheme，将想要选择的主题取消掉注释，并把其他主题注释掉就可以了。</p>
 <h2 id="更改域名"><a href="#更改域名" class="headerlink" title="更改域名"></a>更改域名</h2><h3 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h3><p>可以到 <a href="https://wanwang.aliyun.com/?utm_content=se_980922&amp;gclid=EAIaIQobChMI_8GZr5f23wIVUSUrCh1p3AOUEAAYASAAEgLNv_D_BwE" target="_blank" rel="noopener">万网</a> 购买。<br>注册域名时需实名制，否则后面可能一直无法正确解析域名。<br>在<code>E:\github\blog\source</code>下新建文件，命名为 CNAME，没有后缀。</p>
 <p>创建好后用记事本打开，将购买的域名填写进去，比如我要填写 zhaoxin.site。</p>
 <p>在博客文件夹右键打开<code>Git Bash</code>，输入</p>
 <blockquote>
-<p>hexo g -d</p>
+<p><code>hexo g -d</code></p>
 </blockquote>
 <p>上传到github。</p>
 <h3 id="配置DNS"><a href="#配置DNS" class="headerlink" title="配置DNS"></a>配置DNS</h3><p>登录阿里云，点击”控制台→域名→我的域名→修改DNS”，将DNS修改为</p>
 <blockquote>
-<p>f1g1ns2.dnspod.net<br>f1g1ns1.dnspod.net</p>
+<p><code>f1g1ns2.dnspod.net</code><br><code>f1g1ns1.dnspod.net</code></p>
 </blockquote>
 <p>打开 <a href="https://www.dnspod.cn/" target="_blank" rel="noopener">DNSPOD</a>，注册后添加域名，如下图<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzglspjbxlj20m804ft8p.jpg" alt=""><br>点击 zhaoxin.site，进入后点击添加记录。<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzgltob459j20md04yt8y.jpg" alt=""><br>添加两条，主机记录分别为 @ 和 www，记录类型都为A，记录值为之前创建的github博客页面的ip地址。</p>
 <p>打开cmd命令，ping一下你的页面（例如我是zhaoxin0178.github.io）可以得到ip地址。<br><img src="https://ws1.sinaimg.cn/large/6a674be6ly1fzglvfl85nj20g303n748.jpg" alt=""><br>添加完成后，等待生效，最迟72小时可以通过已购域名访问博客页面。（其实不用等那么久，大概1-2小时就可以了~）</p>
