@@ -252,6 +252,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/第二章/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cetus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cetus' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/20/第二章/" itemprop="url">JS高级阅读笔记——第二章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-20T19:27:13+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="lt-script-gt-元素"><a href="#lt-script-gt-元素" class="headerlink" title="&lt;script&gt;元素"></a><code>&lt;script&gt;元素</code></h2><ol>
+<li>使用<code>&lt;script&gt;</code>元素的方式有两种：直接在页面中嵌入Javascript代码和包含外部Javascript文件。<ul>
+<li>嵌入Javascript代码<br>– 须为<code>&lt;script&gt;</code>指定type属性 <strong>type=”text/javascript”</strong> 。<br>– 代码块中不能出现 <strong></strong> 字符串，否则直接读为结束标签，报错。可以在代码块中通过转义字符“\” 解决这个问题，写为 <strong> &lt;\/script&gt;</strong>。</li>
+<li>包含外部Javascript文件<br>– 必须包含src属性，可以是外部域文件。<br>– 在带有src属性的标签内嵌入的代码会被忽略。</li>
+</ul>
+</li>
+<li>浏览器显示页面时，遇到<code>&lt;body&gt;</code>标签才会开始呈现内容。因此为了不影响浏览器正常加载页面的速度，将<code>&lt;script&gt;</code>标签放在<code>&lt;body&gt;</code>标签的最后。</li>
+<li>为<code>&lt;script&gt;</code>标签添加defer属性后，其包含的脚本将会延迟到整个页面解析完毕后再运行。该属性只适用于外部脚本文件。</li>
+<li>为<code>&lt;script&gt;</code>标签添加async属性后，浏览器会立即下载文件，不保证按照指定顺序执行，但会在页面的load事件前执行。该属性只适用于外部脚本文件。</li>
+</ol>
+<h2 id="文档模式"><a href="#文档模式" class="headerlink" title="文档模式"></a><code>文档模式</code></h2><ol>
+<li>标准模式下，可以用<code>&lt;!DOCTYPE html&gt;</code>来开启一个HTML5文档。</li>
+<li>如果文档开始处没有文档类型声明，则所有浏览器会默认开启混杂模式。</li>
+</ol>
+<h2 id="lt-noscript-gt-元素"><a href="#lt-noscript-gt-元素" class="headerlink" title="&lt;noscript&gt;元素"></a><code>&lt;noscript&gt;元素</code></h2><ol>
+<li>在浏览器不支持脚本或脚本被禁用时，显示<code>&lt;noscript&gt;</code>元素中的内容，用以向用户提示。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/23/github+hexo搭建个人博客以及心酸踩坑史/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -536,7 +694,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -547,7 +705,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -558,7 +716,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
