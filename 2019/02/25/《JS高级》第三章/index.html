@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Javascript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="语法 JS中的变量、函数名和操作符都区分大小写。 标识符格式规则：第一个字符必须是字母或_或$，其他字符可以是字母、_、$或数字。且标识符不能为关键字或保留字。 单行注释以两个斜杠 // 开头。块级注释以 /*开头，以*/结尾。 严格模式：在脚本顶部添加 &amp;quot;use strict&amp;quot;，将在整个脚本中启用严格模式；在函数内部的第一句添加该代码，也可以指定函数在严格模式下执行。严格模式">
+<meta name="keywords" content="Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《JS高级》阅读笔记——第三章">
+<meta property="og:url" content="http://yoursite.com/2019/02/25/《JS高级》第三章/index.html">
+<meta property="og:site_name" content="Cetus&#39; Blog">
+<meta property="og:description" content="语法 JS中的变量、函数名和操作符都区分大小写。 标识符格式规则：第一个字符必须是字母或_或$，其他字符可以是字母、_、$或数字。且标识符不能为关键字或保留字。 单行注释以两个斜杠 // 开头。块级注释以 /*开头，以*/结尾。 严格模式：在脚本顶部添加 &amp;quot;use strict&amp;quot;，将在整个脚本中启用严格模式；在函数内部的第一句添加该代码，也可以指定函数在严格模式下执行。严格模式">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-25T08:37:08.347Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《JS高级》阅读笔记——第三章">
+<meta name="twitter:description" content="语法 JS中的变量、函数名和操作符都区分大小写。 标识符格式规则：第一个字符必须是字母或_或$，其他字符可以是字母、_、$或数字。且标识符不能为关键字或保留字。 单行注释以两个斜杠 // 开头。块级注释以 /*开头，以*/结尾。 严格模式：在脚本顶部添加 &amp;quot;use strict&amp;quot;，将在整个脚本中启用严格模式；在函数内部的第一句添加该代码，也可以指定函数在严格模式下执行。严格模式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/25/《JS高级》第三章/">
+
+
+
+
+
+  <title>《JS高级》阅读笔记——第三章 | Cetus' Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cetus' Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/《JS高级》第三章/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cetus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cetus' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《JS高级》阅读笔记——第三章</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T16:35:05+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ol>
+<li>JS中的变量、函数名和操作符都区分大小写。</li>
+<li>标识符格式规则：第一个字符必须是字母或<code>_</code>或<code>$</code>，其他字符可以是字母、<code>_</code>、<code>$</code>或数字。且标识符不能为关键字或保留字。</li>
+<li>单行注释以两个斜杠 <code>//</code> 开头。块级注释以 <code>/*</code>开头，以<code>*/</code>结尾。</li>
+<li>严格模式：在脚本顶部添加 <code>&quot;use strict&quot;</code>，将在整个脚本中启用严格模式；在函数内部的第一句添加该代码，也可以指定函数在严格模式下执行。严格模式下，会对某些不安全的操作抛出错误。</li>
+</ol>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ol>
+<li>定义变量时，用var后跟一个变量名，例如：var message。但此时message未经初始化，其值和类型都会被保存为undefined。</li>
+<li>如果在定义变量时将其初始化为一个字符串，在修改变量时仍可以修改其类型，再次将变量赋值为数字等。</li>
+<li>用var操作符定义的变量仅成为该作用域的局部变量。例如在函数中定义的变量，在函数退出后就会被销毁。</li>
+<li>可以用一条语句定义多个变量，中间用 <code>,</code> 隔开。</li>
+</ol>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Javascript共有六种数据类型：Undefined、Null、Number、Boolean、String和Object。</p>
+<h3 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h3><ol>
+<li>对一个值使用typeof操作符可能返回以下几种字符串：<br>undefined、boolean、string、number、object（值是对象或null）、function（值是函数）。</li>
+</ol>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a>Undefined类型</h3><ol>
+<li>Undefined类型只有一个值，为undefined。</li>
+<li>调用未经声明的变量会报错，调用未经初始化的变量会返回undefined。</li>
+<li>对未经声明和未经初始化的变量使用typeof操作符都会返回undefined。</li>
+</ol>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h3><ol>
+<li>Null类型只有一个值，为null。</li>
+<li>Null在逻辑上表示空对象指针，使用typeof操作符检测会返回object。</li>
+<li>判断undefined和null的相等性 <code>null == undefined</code> 时，返回true。</li>
+</ol>
+<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a>Boolean类型</h3><ol>
+<li>Boolean类型有true和false两种值。</li>
+<li>任何类型的值调用 Boolean() 函数，都会返回一个Boolean值。如果值为 false、空字符串、0、NaN、null和undefined，则返回false，其他则返回true。</li>
+</ol>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a>Number类型</h3><ol>
+<li>对变量赋值时，十进制正常表示，八进制第一位为 0 ，十六进制前两位为 0x。进行算术计算时，所有数值都会被转换成十进制数。</li>
+<li>浮点数值的保存空间是整数值的两倍，因此会合理转换。</li>
+<li>浮点数值的最高精度是17位小数。</li>
+<li>Number.MAX_VALUE 和 Number.MIN_VALUE保存了JS能表示的最大数值和最小数值。isFinite() 函数确定了一个数值是不是有穷的。</li>
+<li>NaN用于表示一个本来要返回数值的操作数未返回数值的情况。<ul>
+<li>任何涉及NaN的操作都会返回NaN。</li>
+<li>NaN与任何值都不相等，包括NaN本身。</li>
+<li>isNaN() 函数的参数若不能被转换为数值，则返回true，否则返回false。</li>
+</ul>
+</li>
+<li>非数值转换为数值的函数：Number()、parseInt()、parseFloat()。<ul>
+<li>对非空且非数字的字符串使用Number()函数，会被转换为NaN。</li>
+<li>parseInt() 转换字符串时，如果第一个字符不是数字字符或者负号，则返回NaN；如果第一个字符是数字，则会继续解析，直到解析完或遇到非数字字符（舍弃从该非数字字符开始的所有字符）。<br>parseInt() 函数可以在第二个参数指定基数，按规定进制解析字符。</li>
+<li>parseFloat() 函数转换字符串时，遇到的第一个小数点有效，因此可以解析浮点数，但只能解析十进制。</li>
+</ul>
+</li>
+</ol>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h3><ol>
+<li>字符串可以由双引号 <code>&quot;</code> 或单引号 <code>&#39;</code> 表示。</li>
+<li>toString() 方法可以将一个值转换为字符串。该方法适用于数值、布尔值、对象和字符串值。但null和undefined没有这个方法。</li>
+<li>String() 函数能够将任何类型的值转换为字符串，对于null和undefined会直接返回其字面量。</li>
+</ol>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h3><ol>
+<li>对象可以通过执行new操作符加要创建的对象类型的名称来创建。</li>
+<li>Object类型是所有其实例的基础，即Object类型所具有的任何属性和方法都同样存在于更具体的对象中。</li>
+</ol>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="一元操作符"><a href="#一元操作符" class="headerlink" title="一元操作符"></a>一元操作符</h3><ol>
+<li>前置递增递减操作符：变量的值在语句被求值之前改变。<br>后置递增递减操作符：递增和递减操作在语句被求值之后改变。</li>
+<li>一元加减操作符：对非数值的字符串使用时转变为NaN；对对象使用时先调用它们的valueOf()和（或）toString()方法，再进行转换得到值；对其他类型使用时转换得到相应的值。<br>一元加操作符对数值使用时不会有任何变化。<br>一元减操作符对数值使用时将数值变为负数。</li>
+</ol>
+<h3 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h3><ol>
+<li>按位非：<code>~</code> 表示，相当于操作数的负值减1。</li>
+<li>按位与：<code>&amp;</code> 表示，数值对应位都是1为1，其他为0。</li>
+<li>按位或：<code>|</code> 表示，数值对应位都是0为0，其他为1。</li>
+<li>按位异或：<code>^</code>表示，数值对应位相同为0，相异为1。</li>
+<li>左移：<code>&lt;&lt;</code>表示，将数值按二进制移动相应位数，不影响符号位。</li>
+<li>右移：<code>&gt;&gt;</code>表示，保留符号位，并用符号位的值填充空位。</li>
+<li>无符号右移：<code>&gt;&gt;&gt;</code>表示，符号位一起右移，并用0填充空位。</li>
+</ol>
+<h3 id="布尔操作符"><a href="#布尔操作符" class="headerlink" title="布尔操作符"></a>布尔操作符</h3><ol>
+<li>逻辑非：<code>!</code> 表示，将操作数转换为布尔值之后求反。<code>!!</code> 等价于 Boolean()。</li>
+<li>逻辑与：<code>&amp;&amp;</code> 表示，短路操作符。如果左侧是false，则不会再对右侧求值，直接返回false；如果左侧是true，则返回右侧。</li>
+<li>逻辑或：<code>||</code> 表示，短路操作符。如果左侧是true，则不会再对右侧求值，直接返回false；如果左侧是false，则返回右侧。</li>
+</ol>
+<h3 id="乘性操作符"><a href="#乘性操作符" class="headerlink" title="乘性操作符"></a>乘性操作符</h3><ol>
+<li>乘法：<code>*</code> 表示，先调用Number() 将操作数转换为数值，再进行运算。<ul>
+<li>如果有一个操作数为NaN，结果是NaN。</li>
+<li>如果Infinity与0相乘，结果是NaN。</li>
+<li>Infinity与非0数相乘，结果是Infinity或-Infinity，取决于非0数的符号。</li>
+<li>Infinity与Infinity相乘，结果是Infinity。</li>
+</ul>
+</li>
+<li>除法：<code>/</code> 表示，先调用Number() 将操作数转换为数值，再进行运算。<ul>
+<li>如果有一个操作数是NaN，结果是NaN。</li>
+<li>如果Infinity被Infinity除，结果是NaN。</li>
+<li>如果零被零除，结果是NaN。</li>
+<li>非零的有限数被零除，结果是Infinity或-Infinity，取决于非0数的符号。</li>
+<li>Infinity被任何非0数值除，结果是Infinity或-Infinity。</li>
+</ul>
+</li>
+<li>求模：<code>%</code> 表示，执行除法运算，返回余数。</li>
+</ol>
+<h3 id="加性操作符"><a href="#加性操作符" class="headerlink" title="加性操作符"></a>加性操作符</h3><ol>
+<li>加法：<code>+</code> 表示。如果两个操作数都是数值，执行常规加法。若其中一个操作数是字符串，则执行字符串的拼接。</li>
+<li>减法：<code>-</code> 表示。先调用Number() 将操作数转换为数值，再进行运算。若其中一个操作数为NaN，结果为NaN。</li>
+</ol>
+<h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><p><code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>四个关系操作符。</p>
+<ol>
+<li>其中一个为数值时，将另一个转换为数值比较。</li>
+<li>若两个都是字符串，则比较编码值（大写字母的字符编码都小于小写字母）。</li>
+<li>若其中一个为NaN，结果为NaN。</li>
+</ol>
+<h3 id="相等操作符"><a href="#相等操作符" class="headerlink" title="相等操作符"></a>相等操作符</h3><ol>
+<li>相等<code>==</code>和不相等<code>!=</code>：先转换类型再进行比较。<br><code>null == undefined</code>为true。<br><code>NaN == NaN</code>为false。</li>
+<li>全等<code>===</code>和不全等<code>!==</code>：仅比较而不转换类型，需考虑类型是否相同。<br><code>null === undefined</code>为false。</li>
+</ol>
+<h3 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h3><ol>
+<li>variable = boolean_expression ? true_value : false_value<br>若问号前表达式的值为true，则返回第一个值，否则返回第二个值。</li>
+</ol>
+<h3 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h3><ol>
+<li>用 <code>=</code> 表示。</li>
+</ol>
+<h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><ol>
+<li>用 <code>,</code> 表示，可以用于声明多个变量。</li>
+</ol>
+<h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><ol>
+<li>if语句：条件语句</li>
+<li>do-while语句：在对条件表达式求值之前，循环体内的代码会至少执行一次。</li>
+<li>while语句：先对条件表达式求值，再决定是否执行循环体内的代码。</li>
+<li>for语句：for (initialization; expression; post-loop-expression) statement。可以在执行循环之前初始化变量，同时定义循环条件和循环后执行的代码。<br><strong>注意：由于ECMAScript不存在块级作用域，for循环定义的变量可以在外部访问到。</strong></li>
+<li>for-in语句：可以用来枚举对象的属性。</li>
+<li>label语句：label: statement。在代码中添加标签，该标签可以在将来由break或continue语句引用。</li>
+<li>break和continue语句：break语句退出循环后执行循环之后的语句；continue退出循环后从循环的顶部继续执行。</li>
+<li>with语句：with (expression) statement。将代码的作用域设置到一个特定对象中。</li>
+<li>switch语句：对每个case后面添加一个break语句，避免同时执行多个case代码的情况。</li>
+</ol>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ol>
+<li>函数声明：function functionName (arg0, arg1, … , argN) { statements }</li>
+<li>若函数中包含return，则函数会在执行完return语句后立即退出。</li>
+<li>如果定义了命名参数，传入时参数个数可以与命名参数个数不同。<br>声明函数时可以不包含命名的参数，并在函数内部用arguments对象来访问参数数组。<br>命名参数和arguments对象可以共存，但arguments的值与对应命名参数的值保持同步。</li>
+<li>如果定义了两个名字相同的函数，则后面的函数会覆盖前面的函数。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/20/生存与生活/" rel="next" title="生存与生活">
+                <i class="fa fa-chevron-left"></i> 生存与生活
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cetus</p>
+              <p class="site-description motion-element" itemprop="description">年少不知知识贵</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof-操作符"><span class="nav-number">3.1.</span> <span class="nav-text">typeof 操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undefined类型"><span class="nav-number">3.2.</span> <span class="nav-text">Undefined类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Null类型"><span class="nav-number">3.3.</span> <span class="nav-text">Null类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean类型"><span class="nav-number">3.4.</span> <span class="nav-text">Boolean类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number类型"><span class="nav-number">3.5.</span> <span class="nav-text">Number类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String类型"><span class="nav-number">3.6.</span> <span class="nav-text">String类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object类型"><span class="nav-number">3.7.</span> <span class="nav-text">Object类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作符"><span class="nav-number">4.</span> <span class="nav-text">操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一元操作符"><span class="nav-number">4.1.</span> <span class="nav-text">一元操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位操作符"><span class="nav-number">4.2.</span> <span class="nav-text">位操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔操作符"><span class="nav-number">4.3.</span> <span class="nav-text">布尔操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乘性操作符"><span class="nav-number">4.4.</span> <span class="nav-text">乘性操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加性操作符"><span class="nav-number">4.5.</span> <span class="nav-text">加性操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关系操作符"><span class="nav-number">4.6.</span> <span class="nav-text">关系操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相等操作符"><span class="nav-number">4.7.</span> <span class="nav-text">相等操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件操作符"><span class="nav-number">4.8.</span> <span class="nav-text">条件操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值操作符"><span class="nav-number">4.9.</span> <span class="nav-text">赋值操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逗号操作符"><span class="nav-number">4.10.</span> <span class="nav-text">逗号操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语句"><span class="nav-number">5.</span> <span class="nav-text">语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">6.</span> <span class="nav-text">函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cetus</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
