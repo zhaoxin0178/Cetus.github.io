@@ -252,6 +252,212 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/《JS高级》第六章/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cetus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cetus' Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/04/《JS高级》第六章/" itemprop="url">《JS高级》阅读笔记——第六章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-04T21:19:36+08:00">
+                2019-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>对象：无序属性的集合，其属性可以包含基本值、对象或函数。</p>
+<h3 id="属性类型"><a href="#属性类型" class="headerlink" title="属性类型"></a>属性类型</h3><p>ECMA-262第5版在定义只有内部才用的特性时，描述了属性的各种特征，这些特性在JS中不能直接访问。</p>
+<ol>
+<li>数据属性<ul>
+<li>[[Configurable]]：表示能否通过delete删除属性，能否修改属性的特性，能否把属性修改为访问器属性。</li>
+<li>[[Enumerable]]：表示能否通过for-in循环返回属性。</li>
+<li>[[Writable]]：表示能否修改属性的值。</li>
+<li>[[Value]]：包含这个属性的数据值。</li>
+<li>直接在对象上定义的属性前三项值都默认为true， [[Value]]特性则被设定为特定值。</li>
+<li>可以通过Object.defineProperty()方法修改属性默认的特性。</li>
+</ul>
+</li>
+<li>访问器属性<ul>
+<li>访问器属性不包含数据值，包含一对可选的getter和setter函数。在读取访问器属性时，会调用getter函数，这个函数负责返回有效的值；在写入访问器属性时，会调用setter属性并传入新值，这个函数负责决定如何处理数据。</li>
+<li>访问器属性有[[Configurable]]、[[Enumerable]]、[[Get]]、[[Set]]四个特性。</li>
+<li>如果对象前面带有 <code>_</code>，说明该属性只能通过对象方法访问。</li>
+</ul>
+</li>
+</ol>
+<h3 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h3><p>利用Object.defineProperties()方法可以通过描述符一次定义多个属性。这个方法接收两个对象参数：第一个对象是要添加和修改其属性的对象，第二个对象的属性与第一个对象中要添加或修改的属性一一对应。</p>
+<h3 id="读取属性的特性"><a href="#读取属性的特性" class="headerlink" title="读取属性的特性"></a>读取属性的特性</h3><p>利用Object.getOwnPropertyDescriptor()方法，可以取得给定属性的描述符。这个方法接收两个参数：属性所在的对象和要读取其描述符的属性名称，返回值是一个对象。</p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>用Object构造函数或对象字面量都可以创建单个对象，但使用同一个接口创建很多对象会产生大量重复的代码。</p>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span> (<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span> ();</span><br><span class="line">    o.name = name;</span><br><span class="line">    o.age = age;</span><br><span class="line">    o.job = job;</span><br><span class="line">    o.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert (<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = createPerson(<span class="string">"Nicholas"</span>, <span class="number">29</span>, <span class="string">"Software Engineer"</span>);</span><br></pre></td></tr></table></figure>
+<p>函数createPerson()能够根据接受的参数来构建一个包含 所有必要信息的Person对象。该函数可以无数次调用，每次它都会返回一个包含三个属性一个方法的对象。<br>缺点：工厂模式解决了创建多个相似对象的问题，但无法知道一个对象的类型。</p>
+<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>原生构造函数：Object、Array，运行时会自动出现在执行环境中。<br>可以创建自定义的构造函数，即自定义对象类型的属性和方法。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> <span class="params">(name, age, job)</span> </span>&#123;</span><br><span class="line"><span class="keyword">this</span>.name = name;</span><br><span class="line"><span class="keyword">this</span>.age = age;</span><br><span class="line"><span class="keyword">this</span>.job = job;</span><br><span class="line"><span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">alert (<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>, <span class="number">29</span>, <span class="string">"Software Engineer"</span>);</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">"Greg"</span>, <span class="number">27</span>, <span class="string">"Doctor"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>构造函数应该以大写字母开头。<br>使用new操作符创建了Person的两个新实例对象，这两个对象都有一个constructor属性，该属性指向Person，即<br><code>alert(person1.constructor == Person);  //true</code>。<br>该例子中创建的对象既是Person的实例，也是Object的实例，因为所有对象都继承自Object。可以用instanceof来检测。</p>
+<ol>
+<li>使用new操作符创建对象的步骤：<br>（1）创建一个新对象<br>（2）将构造函数的作用域赋给新对象<br>（3）执行构造函数中的代码<br>（4）返回新对象</li>
+<li>构造函数作为普通函数调用时，属性和方法都会添加给window对象，因此可以在调用完函数时，通过window对象来调用sayName()方法。<br>也可以使用call()或者apply()在某个特殊对象的作用域中调用Person()函数，将属性和方法赋给特殊对象。</li>
+<li>构造函数的缺点：<br>每个方法都要在每个实例上重新创建一遍。因为在ECMAScript中函数也是对象，因此每定义一个函数，就实例化了一个对象。这样会导致不同的作用域链和标识符解析。因此，不同实例上的同名函数是不相等的。</li>
+</ol>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>每个创建的函数都有一个prototype属性，这个属性是一个指针，指向一个包含可以由特定类型的所有实例共享的属性和方法。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.name = <span class="string">"Nicholas"</span>;</span><br><span class="line">Person.prototype.age = <span class="number">29</span>;</span><br><span class="line">Person.prototype.job = <span class="string">"Software Engineer"</span>;</span><br><span class="line">Person.prototype.satName = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person();</span><br><span class="line">person1.sayName() = <span class="string">"Nicholas"</span>;</span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person();</span><br><span class="line">person2.sayName() = <span class="string">"Nicholas"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>prototype是通过调用构造函数而创建的那个对象实例的原型对象。<br>优点：所有对象实例共享它所包含的属性和方法。不必在构造函数中定义对象实例的信息，直接将所有信息添加到原型对象上。<br>构造函数变成了空函数，但仍可以通过调用构造函数来创建新对象，而且新对象具有相同的属性和方法。</p>
+<ol>
+<li>理解原型对象<ul>
+<li>只要创建一个新函数，那么该函数就会被创建一个prototype属性，指向函数的原型对象。所有原型对象都会自动获得一个constructor属性，这个属性是一个指向prototype属性所在函数的指针，即<br><code>A.prototype.constructor == A</code>。</li>
+<li>当调用构造函数创建一个新实例后，实例内部会包含一个指针 [[Prototype]]，指向构造函数的原型对象，该指针在外部访问不到。但每个实例对象上支持一个属性<em>proto</em>，可以访问。且该属性连接的是实例与构造函数的原型对象，即<br><code>person1._proto_ == Person.prototype</code>。</li>
+<li>可以用isPrototypeOf()方法来确定对象之间是否存在这种关系，例如<br><code>alert(Person.prototype.isPrototyprOf(person1));  //true</code>。</li>
+<li>可以用Object.getPrototypeOf()方法获得一个对象的原型，例如<br><code>alert(Object.getPrototypeOf(person1) == Person.prototype);  //true</code>。</li>
+<li>当代码读取某个对象的属性时，会执行搜索。首先搜索实例本身，如果找到了具有给定名字的属性，则返回该属性值；如果没有找到，则搜索该实例的原型对象，找到了则返回该属性的值。<br>当为实例添加一个属性时，该属性会屏蔽原型对象中保存的同名属性，即这种行为会阻止我们访问原型中的那个属性，但不会修改那个属性。使用delete操作符可以删除实例属性，使它能够重新访问原型中的属性。</li>
+<li>使用hasOwnProperty()方法可以检测一个属性是存在于实例中还是原型中，如果存在于实例中，则返回true。</li>
+</ul>
+</li>
+<li>原型与in操作符<br>有两种方式使用in操作符，单独使用和在for-in循环使用。<ul>
+<li>单独使用时，in操作符会在通过对象能够访问给定属性时返回true，无论该属性存在于实例中还是原型中。例如：<br><code>alert(&quot;name&quot; in person1);    //只要实例person1或其原型中包含属性name，就返回true</code>。</li>
+<li>在使用for-in循环时，返回的是所有能够通过对象访问的、可枚举的属性，既包括存在于实例中的属性，也包括存在于原型中的属性。<br>要取得对象上所有可枚举的实例属性，可以用Object.keys()方法。该方法接收一个对象作为参数，返回一个包含所有可枚举属性的字符串数组。<br>要取得对象上所有实例属性，无论是否可枚举，可以使用Object.getOwnPropertyNames()方法。（constructor属性不可枚举，但仍可使用这种方法取得。）</li>
+</ul>
+</li>
+<li>更简单的原型语法<br>前面例子中，每添加一个属性和方法就要敲一遍Person.prototype。为了更好地封装原型，可以通过对象字面量的方式来为原型添加属性和方法。<br>但通过对象字面量方式创建的原型对象，其constructor属性不再指向Person，而是指向Object。也可以通过在对象字面量中设置 <code>constructor: Person</code> 的方式使它仍然指向Person，但这样会导致constructor属性成为可枚举属性。</li>
+<li>原型的动态性<br>实例与原型之间具有松散连接关系。实例与原型之间的连接是一个指针，而不是副本。所以对原型对象的任何修改都能从实例上反映出来。但是如果通过对象字面量的方式重写整个原型对象则会导致该实例无法找到原型。</li>
+<li>原生对象的原型<br>所有原生引用类型（Object、Array、String等）都在其构造函数的原型上定义了方法。</li>
+<li>原型对象的缺点<br>原型中所有属性都是被所有实例共享的。对于包含引用类型值的属性，通过实例修改属性会导致原型上的属性也发生变化。</li>
+</ol>
+<h3 id="组合使用构造函数模式和原型模式"><a href="#组合使用构造函数模式和原型模式" class="headerlink" title="组合使用构造函数模式和原型模式"></a>组合使用构造函数模式和原型模式</h3><p>构造函数模式用于定义实例属性，原型模式用于定义方法和共享的属性。这样，每个实例都会有自己的一份实例属性的副本，同时又共享着对于方法的引用，最大限度地节省了内存。</p>
+<h3 id="动态原型模式"><a href="#动态原型模式" class="headerlink" title="动态原型模式"></a>动态原型模式</h3><p>动态原型模式将所有信息封装在构造函数中，通过在构造函数中初始化原型，保持了同时使用构造函数和原型的优点。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> <span class="params">(name, age, job)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//属性</span></span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.job = job;</span><br><span class="line">    <span class="comment">//方法</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span>.sayName != <span class="string">"function"</span>) &#123;</span><br><span class="line">        Person.prototype.sayName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">            alert(<span class="keyword">this</span>.name);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> friend = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>, <span class="number">29</span>, <span class="string">"Software Engineer"</span>);</span><br><span class="line">friend.sayName();    <span class="comment">//"Nicholas"</span></span><br></pre></td></tr></table></figure></p>
+<p>当sayName()方法不存在时，会将它添加到原型中。因此这一小段代码只会在初次调用构造函数时执行。</p>
+<h3 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h3><p>寄生构造函数模式基本思想：创建一个函数，该函数的作用是封装创建对象的代码，然后返回新创建的对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">    o.name = name;</span><br><span class="line">    o.age = age;</span><br><span class="line">    o.job = job;</span><br><span class="line">    o.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> friend = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>, <span class="number">29</span>, <span class="string">"Software Engineer"</span>);</span><br><span class="line">friend.sayName();    <span class="comment">//"Nicholas"</span></span><br></pre></td></tr></table></figure></p>
+<p>这个模式下，除了使用new操作符并把使用的包装函数称为构造函数之外，与工厂模式没有区别。但是在寄生构造函数模式下，返回的对象与构造函数或者与构造函数的原型属性之间没有关系，因此不能用instanceof操作符来确定对象类型。</p>
+<h3 id="稳妥构造函数模式"><a href="#稳妥构造函数模式" class="headerlink" title="稳妥构造函数模式"></a>稳妥构造函数模式</h3><p>稳妥对象概念：指的是没有公共属性，而且其方法也不引用this的对象。<br>稳妥构造函数与寄生构造函数类似，但有两点不同：一是新创建对象的实例方法不引用this，二是不使用new操作符调用构造函数。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>利用原型链实现继承，基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。可以让原型对象等于另一个类型的实例，此时原型对象将包含一个指向另一个原型的指针，相应地另一个原型中包含着一个指向另一个构造函数的指针。这样层层递进，就构成了实例与原型的链条。<br>实现原型链的一个基本模式：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.property = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.property;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.subproperty = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();    <span class="comment">//替换原型</span></span><br><span class="line"><span class="comment">//给原型添加方法的代码要放在替换原型的语句之后</span></span><br><span class="line">SubType.prototype.getSubValue = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.subproperty;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> SubType();</span><br><span class="line">alert (instance.getSuperValue());    <span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
+<p>在通过原型链实现继承的情况下，搜索过程沿着原型链继续向上。例如，本例中调用instance.getSuperValue()会经历三个搜索步骤：1）搜索实例；2）搜索SubType.prototype；3）搜索SuperType.prototype。</p>
+<ol>
+<li>所有引用类型都默认继承了Object，因此默认原型都会包含一个内部指针，指向Object.prototype。</li>
+<li>可以通过两种方式来确定原型和实例之间的关系。<ul>
+<li>instanceof操作符，只要用这个操作符测试实例与原型链中出现过的构造函数，都会返回true。</li>
+<li>isPrototypeOf()方法，只要原型链中出现过的原型，都可以认为是该原型链派生的实例的原型。</li>
+</ul>
+</li>
+<li>给原型添加方法的代码要放在替换原型的语句之后。并且不能使用对象字面量创建原型方法，否则会重写原型链。</li>
+<li>原型链的缺点：<ul>
+<li>包含引用类型值的原型属性会被所有实例共享，当通过实例修改属性时，所有实例的对应属性都会被修改。</li>
+<li>在创建子类型的实例时，不能向超类型的构造函数中传递参数。</li>
+</ul>
+</li>
+</ol>
+<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><p>为了解决原型中包含引用类型值所带来的问题，可以使用借用构造函数。基本思想是：在子类型构造函数内部调用超类型构造函数。<br>将前文例子中的<code>SubType.prototype = new SuperType();</code>替换为<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    SuperType.call (<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过使用call()方法（或apply()方法），在新创建的SubType实例环境下调用了SuperType构造函数。这样会在新SubType对象上执行SuperType()函数定义的所有对象初始化代码，这样SubType的每个实例会拥有引用类型属性的副本。即通过实例修改原型属性时，其他实例对应的属性不会再被修改。</p>
+<ol>
+<li>借用构造函数也可以在子类型构造函数中向超类型构造函数传递参数。</li>
+<li>借用构造函数缺点： 方法都在构造函数中定义，因此不存在函数复用。而且在超类型的原型中定义的方法，对子类型不可见。</li>
+</ol>
+<h3 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h3><p>将原型链和借用构造函数的方式结合，使用原型链实现对原型属性和方法的继承，通过借用构造函数实现对实例属性的继承。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span> <span class="params">(name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.sayName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span> <span class="params">(name, age)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//继承属性</span></span><br><span class="line">    SuperType.call(<span class="keyword">this</span>, name);</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//继承方法</span></span><br><span class="line">SubType.prototype = <span class="keyword">new</span> SuperType();</span><br><span class="line">SubType.prototype.constructor = SubType;</span><br><span class="line">SubType.prototype.sayAge = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType (<span class="string">"Nicholas"</span>, <span class="number">29</span>);</span><br><span class="line">instance1.colors.push(<span class="string">"black"</span>);</span><br><span class="line">alert (instance1.colors);    <span class="comment">//"red,blue,green,black"</span></span><br><span class="line">instance1.sayName();    <span class="comment">//"Nicholas"</span></span><br><span class="line">instance1.sayAge();    <span class="comment">//29</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance2 = <span class="keyword">new</span> SubType(<span class="string">" Greg"</span>, <span class="number">27</span>);</span><br><span class="line">alert (instance2.colors);    <span class="comment">//"red,blue,green"</span></span><br><span class="line">instance2.sayName();    <span class="comment">//"Greg"</span></span><br><span class="line">instance2.sayAge();    <span class="comment">//27</span></span><br></pre></td></tr></table></figure></p>
+<p>两个不同的SubType实例既分别拥有自己的属性，又可以使用相同的方法。<br>组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为最常用的继承方式。</p>
+<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><p>通过Object.create()方法实现原型式继承，该方法接收两个参数：一个用作新对象原型的对象和一个为新对象定义额外属性的对象。当只传入一个参数时，Object.create()方法与object()方法行为相同。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> anotherPerson = Object.create(person, &#123;</span><br><span class="line">    name: &#123;</span><br><span class="line">        <span class="keyword">value</span>:<span class="string">"Greg"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>类似于原型模式，包含引用类型值的属性始终会共享相同的值。</p>
+<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><p>寄生式继承基本思想：创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再返回对象。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnother</span><span class="params">(original)</span> </span>&#123;    <span class="comment">//original参数是将要作为新对象基础的对象</span></span><br><span class="line">    <span class="keyword">var</span> <span class="keyword">clone</span> = object(original);</span><br><span class="line">    <span class="keyword">clone</span>.sayHi = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        alert(<span class="string">"Hi"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">clone</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="寄生组合式继承"></a>寄生组合式继承</h3><p>组合继承的缺点：调用两次超类型构造函数。一次是在创建子类型原型的时候，一次是在子类型构造函数内部。这样会导致在新对象上创建实例属性时会屏蔽原型中的两个同名属性。<br>寄生组合式继承可以解决这个问题。即借用构造函数来继承属性，通过原型链的混成形式来继承方法。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span> <span class="params">(subType, superType)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> prototype = object(superType.prototype);    <span class="comment">//创建超类型原型的一个副本</span></span><br><span class="line">    prototype.constructor = subType;    <span class="comment">//为创建的副本添加constructor属性，弥补因重写原型而失去的默认属性</span></span><br><span class="line">    subType.prototype = prototype;    <span class="comment">//将创建的副本赋值给子类型的原型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span> <span class="params">(name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>];</span><br><span class="line">&#125;</span><br><span class="line">SuperType.prototype.sayName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span> <span class="params">(name, age)</span> </span>&#123;</span><br><span class="line">    SuperType.call(<span class="keyword">this</span>, name);</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(SubType, Supertype);</span><br><span class="line">SubType.prototype.sayAge = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/《JS高级》第三章/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1110,7 +1316,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
